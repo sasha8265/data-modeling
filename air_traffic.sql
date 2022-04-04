@@ -10,30 +10,29 @@ CREATE DATABASE air_traffic;
 CREATE TABLE airlines (
     id SERIAL PRIMARY KEY,
     name TEXT
-)
+);
 
 CREATE TABLE airports (
     id SERIAL PRIMARY KEY,
     city TEXT,
     country TEXT
-)
+);
 
 CREATE TABLE passengers (
     id SERIAL PRIMARY KEY,
     first_name TEXT,
     last_name TEXT
-)
+);
 
-CREATE TABLE tickets
-(
-  id SERIAL PRIMARY KEY,
-  passenger_id INT REFERENCE passengers NOT NULL,
-  seat TEXT NOT NULL,
-  departure TIMESTAMP NOT NULL,
-  arrival TIMESTAMP NOT NULL,
-  airline_id INT REFERENCE airlines NOT NULL,
-  from_airport_id INT REFERENCE airports NOT NULL,
-  to_airport INT REFERENCE airports NOT NULL,
+CREATE TABLE tickets (
+    id SERIAL PRIMARY KEY,
+    passenger_id INT REFERENCES passengers NOT NULL,
+    seat TEXT NOT NULL,
+    departure TIMESTAMP NOT NULL,
+    arrival TIMESTAMP NOT NULL,
+    airline_id INT REFERENCES airlines NOT NULL,
+    from_airport_id INT REFERENCES airports NOT NULL,
+    to_airport_id INT REFERENCES airports NOT NULL
 );
 
 INSERT INTO airlines (name)
@@ -69,7 +68,7 @@ VALUES
     ('Waneta', 'Skeleton'),
     ('Berkie', 'Wycliff'),
     ('Alvin', 'Leathes'),
-    ('Cory', 'Squibbes')
+    ('Cory', 'Squibbes');
 
 INSERT INTO tickets 
 (passenger_id, seat, airline_id, departure, from_airport_id, arrival, to_airport_id)
